@@ -16,8 +16,14 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.shortcuts import redirect
+
+def redirect_to_sentiment(request):
+    return redirect('/sentiment/')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/sentiment/', include('sentiment_analysis.urls')),
+    path('api/sentiment/', include('sentiment_analysis.urls', namespace='api')),
+    path('sentiment/', include('sentiment_analysis.urls', namespace='ui')),
+    path('', redirect_to_sentiment),  # Redirection vers l'interface
 ]

@@ -19,6 +19,11 @@ class SentimentAnalysisService:
             except LookupError:
                 nltk.download('punkt')
                 
+            try:
+                nltk.data.find('tokenizers/punkt_tab')
+            except LookupError:
+                nltk.download('punkt_tab')
+                
         except Exception as e:
             logger.error(f"Error initializing sentiment analysis service: {e}")
             raise

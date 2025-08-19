@@ -2,6 +2,7 @@ from rest_framework import generics, status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from django.http import JsonResponse
+from django.shortcuts import render
 from .models import SentimentAnalysis
 from .serializers import (
     SentimentAnalysisSerializer, 
@@ -15,6 +16,13 @@ import logging
 logger = logging.getLogger(__name__)
 
 sentiment_service = SentimentAnalysisService()
+
+# Vue pour l'interface graphique
+def index(request):
+    """Vue principale pour l'interface d'analyse de sentiment"""
+    return render(request, 'sentiment_analysis/index.html', {
+        'title': 'Analyseur de Sentiment DistilBERT',
+    })
 
 class SentimentAnalysisListView(generics.ListAPIView):
     queryset = SentimentAnalysis.objects.all()

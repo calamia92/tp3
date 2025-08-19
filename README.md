@@ -34,6 +34,30 @@ python manage.py createsuperuser
 python manage.py runserver
 ```
 
+## Interface Graphique
+
+L'application propose une **interface web moderne et intuitive** pour analyser les sentiments :
+
+### 🌐 Accès à l'interface :
+- **URL principale** : http://127.0.0.1:8000
+- **Interface d'administration** : http://127.0.0.1:8000/admin (admin/admin123)
+
+### ✨ Fonctionnalités de l'interface :
+1. **Analyse de texte en temps réel** avec DistilBERT
+2. **Analyse par phrases** pour des textes longs
+3. **Historique des analyses** avec sauvegarde automatique
+4. **Exemples de textes** pour tester facilement
+5. **Statistiques de confiance** avec barres de progression
+6. **Interface responsive** (PC, tablette, mobile)
+7. **Raccourcis clavier** (Ctrl+Entrée pour analyser)
+
+### 🎯 Comment utiliser l'interface :
+1. Ouvrez http://127.0.0.1:8000 dans votre navigateur
+2. Tapez ou collez votre texte dans la zone de saisie
+3. Cliquez sur "Analyser le sentiment" ou utilisez Ctrl+Entrée
+4. Consultez les résultats avec le score de confiance
+5. Explorez l'historique de vos analyses
+
 ## Endpoints API
 
 ### 1. Analyser un texte

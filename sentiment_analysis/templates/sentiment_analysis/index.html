@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analyseur de Sentiment - DistilBERT</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'sentiment_analysis/css/style.css' %}">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1><i class="fas fa-brain"></i> Analyseur de Sentiment</h1>
+            <p class="subtitle">Analyse des sentiments avec DistilBERT de Hugging Face</p>
+        </header>
+
+        <div class="main-content">
+            <!-- Analyse de texte principal -->
+            <div class="analysis-section">
+                <h2><i class="fas fa-comment-dots"></i> Analyser un texte</h2>
+                <form id="sentimentForm">
+                    <div class="input-group">
+                        <label for="textInput">Entrez votre texte :</label>
+                        <textarea 
+                            id="textInput" 
+                            placeholder="Tapez votre texte ici pour analyser son sentiment..."
+                            rows="4"
+                            maxlength="10000"
+                        ></textarea>
+                        <div class="char-counter">
+                            <span id="charCount">0</span>/10000 caractères
+                        </div>
+                    </div>
+                    
+                    <div class="button-group">
+                        <button type="submit" id="analyzeBtn" class="btn btn-primary">
+                            <i class="fas fa-search"></i> Analyser le sentiment
+                        </button>
+                        <button type="button" id="analyzeSentencesBtn" class="btn btn-secondary">
+                            <i class="fas fa-list"></i> Analyser par phrases
+                        </button>
+                    </div>
+                </form>
+
+                <!-- Zone de résultats -->
+                <div id="results" class="results hidden">
+                    <h3><i class="fas fa-chart-bar"></i> Résultats</h3>
+                    <div id="resultContent"></div>
+                </div>
+
+                <!-- Zone de chargement -->
+                <div id="loading" class="loading hidden">
+                    <div class="spinner"></div>
+                    <p>Analyse en cours avec DistilBERT...</p>
+                </div>
+            </div>
+
+            <!-- Historique -->
+            <div class="history-section">
+                <h2><i class="fas fa-history"></i> Historique des analyses</h2>
+                <button id="loadHistoryBtn" class="btn btn-outline">
+                    <i class="fas fa-refresh"></i> Charger l'historique
+                </button>
+                <div id="history" class="history-list"></div>
+            </div>
+        </div>
+
+        <!-- Exemples de textes -->
+        <div class="examples-section">
+            <h3><i class="fas fa-lightbulb"></i> Exemples à tester</h3>
+            <div class="examples-grid">
+                <div class="example-card" onclick="setExampleText('Je suis très heureux aujourd\'hui ! Cette application est fantastique.')">
+                    <div class="sentiment-badge positive">Positif</div>
+                    <p>Je suis très heureux aujourd'hui ! Cette application est fantastique.</p>
+                </div>
+                <div class="example-card" onclick="setExampleText('Je suis déçu par ce service. Rien ne fonctionne correctement.')">
+                    <div class="sentiment-badge negative">Négatif</div>
+                    <p>Je suis déçu par ce service. Rien ne fonctionne correctement.</p>
+                </div>
+                <div class="example-card" onclick="setExampleText('Le temps est nuageux aujourd\'hui. Il pourrait pleuvoir.')">
+                    <div class="sentiment-badge neutral">Neutre</div>
+                    <p>Le temps est nuageux aujourd'hui. Il pourrait pleuvoir.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Informations sur le modèle -->
+        <div class="model-info">
+            <h3><i class="fas fa-info-circle"></i> À propos du modèle</h3>
+            <div class="info-grid">
+                <div class="info-item">
+                    <i class="fas fa-robot"></i>
+                    <div>
+                        <strong>Modèle</strong>
+                        <p>DistilBERT base uncased (SST-2)</p>
+                    </div>
+                </div>
+                <div class="info-item">
+                    <i class="fas fa-chart-line"></i>
+                    <div>
+                        <strong>Précision</strong>
+                        <p>~91% sur les données de test</p>
+                    </div>
+                </div>
+                <div class="info-item">
+                    <i class="fas fa-language"></i>
+                    <div>
+                        <strong>Langue</strong>
+                        <p>Anglais (fonctionne partiellement en français)</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="{% static 'sentiment_analysis/js/app.js' %}"></script>
+</body>
+</html>
